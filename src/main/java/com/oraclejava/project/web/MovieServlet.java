@@ -32,8 +32,37 @@ public class MovieServlet extends HttpServlet {
 		}
 	}
 	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String action = req.getParameter("action");
+		if(action == null) {
+			action = "list";
+		}
+		switch (action) {
+		case "write":
+			createMovie(req,resp);
+			break;
+		case "list":
+			listMovie(req, resp);
+			break;
+		}
+	
+	}
+	
+	private void createMovie(HttpServletRequest req, HttpServletResponse resp)  throws ServletException, IOException{
+		
+		MovieDAO movieDAO = new MovieDAOImpl();
+		Movie movie = new Movie();
+		movie.setTitle(req.getParameter("title"));
+		movie.setPrice(Integer.parseInt(req.getParameter("price")));
+		movieDAO.insertMovie(movie);
+		resp.sendRedirect("/movie/MovieServlet");
+	}
+	
+	
 	private void writeMovie(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/view/movie.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/view/write.jsp").forward(req, resp);
 		
 		
 	}
@@ -48,6 +77,9 @@ public class MovieServlet extends HttpServlet {
 	
 	}
 	
+	
+
+
 }
 
 
