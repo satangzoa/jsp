@@ -26,6 +26,7 @@ public List<Movie> selectMovieAll() {
 			movie.setMovie_id(rs.getInt("movie_id"));
 			movie.setTitle(rs.getString("title"));
 			movie.setPrice(rs.getInt("price"));
+			movie.setSynopsis(rs.getString("synopsis"));
 			list.add(movie);
 		}
 		rs.close();

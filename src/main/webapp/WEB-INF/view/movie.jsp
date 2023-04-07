@@ -27,7 +27,7 @@
 			<img alt="${m.title}사진" src="/movie/images/${m.movie_id}.png" width="100px"><br>
 			영화명: ${m.title}<br>
 			가격:  ${m.price}원<br>
-		
+			줄거리:  ${m.synopsis}<br>
 		</a>
 		</div>
 	</c:forEach>
