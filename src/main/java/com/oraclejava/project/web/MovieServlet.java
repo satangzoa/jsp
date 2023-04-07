@@ -26,12 +26,27 @@ public class MovieServlet extends HttpServlet {
 		case "write":
 			writeMovie(req,resp);
 			break;
+		case "search":
+			searchMovie(req,resp);
+			break;
 		case "list":
 			listMovie(req, resp);
 			break;
 		}
 	}
 	
+	private void searchMovie(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		MovieDAO movieDAO = new MovieDAOImpl();
+		String title = req.getParameter("title");
+		List<Movie> movieList = movieDAO.searchMovie(title);
+		
+		req.setAttribute("movieList", movieList);
+		req.getRequestDispatcher("/WEB-INF/view/movie.jsp").forward(req, resp);
+	
+		
+	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

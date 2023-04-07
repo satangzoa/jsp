@@ -38,8 +38,41 @@ public List<Movie> selectMovieAll() {
 	
 	
 	return list;
+	
+	
 }
-		@Override
+		
+	@Override
+	public List<Movie> searchMovie(String keyword) {
+	List<Movie> list = new ArrayList<>();
+	String sql = "SELECT * FROM movie where title like ?";
+	PreparedStatement pstmt = null;
+	OracleDBConnection odc = null;
+	
+	try {
+		odc = new OracleDBConnection();
+		pstmt = odc.getConnection().prepareStatement(sql);
+		pstmt.setString(1, "%" + keyword + "%");
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			Movie movie = new Movie();
+			movie.setMovie_id(rs.getInt("movie_id"));
+			movie.setTitle(rs.getString("title"));
+			movie.setPrice(rs.getInt("price"));
+			list.add(movie);
+		}
+		rs.close();
+		pstmt.close();
+	} catch(SQLException e) {
+		System.out.println("sql 에러 발생:" + e);
+	} finally {
+		odc.close();
+	}
+	
+	
+	return list;
+	}
+@Override
 		public void insertMovie(Movie movie) {
 			String sql = "insert into movie(movie_id,title,price) values (movie_seq.nextval, ?,?)";
 			PreparedStatement pstmt = null;
@@ -63,7 +96,31 @@ public List<Movie> selectMovieAll() {
 		
 		@Override
 			public Movie detailMove(int id) {
-				return null;
+			Movie movie = new Movie();
+			String sql = "SELECT * FROM movie where movie_id= ?";
+			PreparedStatement pstmt = null;
+			OracleDBConnection odc = null;
+			
+			try {
+				
+				odc = new OracleDBConnection();
+				pstmt = odc.getConnection().prepareStatement(sql);
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				if (rs.next()) {
+					movie.setMovie_id(rs.getInt("movie_id"));
+					movie.setTitle(rs.getString("title"));
+					movie.setPrice(rs.getInt("price"));
+				}
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println("sql 에러 발생:" + e);
+			} finally {
+				odc.close();
+			}
+			
+				return movie;
 			}
 		
 		@Override

@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>영화 정보 등록</title>
+<link rel="stylesheet" href="main.css">
 </head>
 <body>
 	<h2>영화 정보 등록</h2>
