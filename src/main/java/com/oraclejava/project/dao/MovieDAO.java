@@ -6,6 +6,9 @@ import com.oraclejava.project.dto.Movie;
 
 public interface MovieDAO {
 	public List<Movie> selectMovieAll();
-	
+	public void insertMovie(Movie movie);
+	public Movie detailMove(int id);
+	public void updateMovie(Movie movie);
+	public void deleteMovie(int id);
 	
 }

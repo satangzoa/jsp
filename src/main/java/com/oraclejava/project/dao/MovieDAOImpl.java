@@ -39,8 +39,59 @@ public List<Movie> selectMovieAll() {
 	
 	return list;
 }
-	
+		@Override
+		public void insertMovie(Movie movie) {
+			String sql = "insert into movie(movie_id,title,price) values (movie_seq.nextval, ?,?)";
+			PreparedStatement pstmt = null;
+			OracleDBConnection odc = null;
+			
+			try { 
+				odc = new OracleDBConnection();
+				odc.getConnection().setAutoCommit(false);//트랜젝션 시작 기록시작
+				pstmt = odc.getConnection().prepareStatement(sql);
+				pstmt.setString(1,movie.getTitle());
+				pstmt.setInt(2,movie.getPrice());
+				pstmt.executeUpdate();
+				odc.getConnection().commit(); // 트랜잭션 종료
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println("sql 에러 발생:" + e);
+			} finally {
+				odc.close();
+			}
+		}
+		
+		@Override
+			public Movie detailMove(int id) {
+				return null;
+			}
+		
+		@Override
+			public void updateMovie(Movie movie) {
+				
+			}
+		
+		@Override
+			public void deleteMovie(int id) {
+				
+			}
+		
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
