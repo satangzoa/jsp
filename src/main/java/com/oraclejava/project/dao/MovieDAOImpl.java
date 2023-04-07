@@ -13,7 +13,7 @@ public class MovieDAOImpl implements MovieDAO{ //ctrl space 누른후 override 한다
 public List<Movie> selectMovieAll() {
 
 	List<Movie> list = new ArrayList<>();
-	String sql = "select * from movie";
+	String sql = "select * from movie order by title";
 	PreparedStatement pstmt = null;
 	OracleDBConnection odc = null;
 	
@@ -95,7 +95,7 @@ public List<Movie> selectMovieAll() {
 		}
 		
 		@Override
-			public Movie detailMove(int id) {
+			public Movie detailMovie(int id) {
 			Movie movie = new Movie();
 			String sql = "SELECT * FROM movie where movie_id= ?";
 			PreparedStatement pstmt = null;
@@ -111,6 +111,7 @@ public List<Movie> selectMovieAll() {
 					movie.setMovie_id(rs.getInt("movie_id"));
 					movie.setTitle(rs.getString("title"));
 					movie.setPrice(rs.getInt("price"));
+					movie.setSynopsis(rs.getString("synopsis"));
 				}
 				rs.close();
 				pstmt.close();

@@ -29,12 +29,25 @@ public class MovieServlet extends HttpServlet {
 		case "search":
 			searchMovie(req,resp);
 			break;
+		case "detail":
+			detailMovie(req,resp);
+			break;
 		case "list":
 			listMovie(req, resp);
 			break;
 		}
 	}
 	
+	private void detailMovie(HttpServletRequest req, HttpServletResponse resp)  throws ServletException, IOException{
+		MovieDAO movieDAO = new MovieDAOImpl();
+		
+		int id = Integer.parseInt(req.getParameter("id"));
+		Movie movie = movieDAO.detailMovie(id);
+		req.setAttribute("movie", movie);
+		req.getRequestDispatcher("/WEB-INF/view/detail.jsp").forward(req, resp);
+		
+	}
+
 	private void searchMovie(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		MovieDAO movieDAO = new MovieDAOImpl();

@@ -23,9 +23,10 @@
 	<div id="movieList">
 	<c:forEach var="m" items="${movieList}">
 		<div style="margin:5px" class="a">
-		<a href="/movie/MovieServlet?action=detail">
-		영화명: ${m.title}<br>
-		가격:  ${m.price}원<br>
+		<a href="/movie/MovieServlet?action=detail&id=${m.movie_id }">
+			<img alt="${m.title}사진" src="/movie/images/${m.movie_id}.png" width="100px"><br>
+			영화명: ${m.title}<br>
+			가격:  ${m.price}원<br>
 		
 		</a>
 		</div>

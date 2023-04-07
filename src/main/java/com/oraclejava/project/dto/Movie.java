@@ -5,6 +5,7 @@ public class Movie { //table movie
 	private int movie_id; //영화 아이디
 	private String title; // 영화 제목
 	private int price; // 영화 가격
+	private String synopsis; // 줄거리
 	
 	//gettter.setter 추가
 	
@@ -25,6 +26,12 @@ public class Movie { //table movie
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public String getSynopsis() {
+		return synopsis;
+	}
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
 	}
 	
 	
