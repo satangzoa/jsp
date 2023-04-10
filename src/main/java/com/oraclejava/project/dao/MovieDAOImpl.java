@@ -127,16 +127,52 @@ public List<Movie> selectMovieAll() {
 		
 		@Override
 			public void updateMovie(Movie movie) {
-				
+			String sql = "update movie set title = ?, price =?, synopsis =? where movie_id = ?";
+			PreparedStatement pstmt = null;
+			OracleDBConnection odc = null;
+			
+			try { 
+				odc = new OracleDBConnection();
+				odc.getConnection().setAutoCommit(false);
+				pstmt = odc.getConnection().prepareStatement(sql);
+				pstmt.setString(1,movie.getTitle());
+				pstmt.setInt(2,movie.getPrice());
+				pstmt.setString(3, movie.getSynopsis());
+				pstmt.setInt(4, movie.getMovie_id());
+				pstmt.executeUpdate();
+				odc.getConnection().commit();
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println("sql 에러 발생:" + e);
+			} finally {
+				odc.close();
 			}
-		
+			
+				
+		}
 		@Override
 			public void deleteMovie(int id) {
 				
-			}
-		
-}
-
+				String sql = "delete from movie where movie_id = ?";
+				PreparedStatement pstmt = null;
+				OracleDBConnection odc = null;
+				
+				try { 
+					odc = new OracleDBConnection();
+					odc.getConnection().setAutoCommit(false);
+					pstmt = odc.getConnection().prepareStatement(sql);
+					pstmt.setInt(1,id);
+					pstmt.executeUpdate();
+					odc.getConnection().commit();
+					pstmt.close();
+				} catch (SQLException e) {
+					System.out.println("sql 에러 발생:" + e);
+				} finally {
+					odc.close();
+				}
+				
+					
+		}}
 
 
 

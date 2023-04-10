@@ -23,15 +23,10 @@ a:active {
 }
 
 #movieList  {
-	display: grid;
+/* 	display: grid; */
   
-	 grid-template-rows: 1fr ;
-	grid-template-columns: 1fr 1fr  1fr 1fr ;  
-}
-
-.a {
-border: 1px solid;
-width:200px;
+/* 	 grid-template-rows: 1fr ; */
+/* 	grid-template-columns: 1fr 1fr  1fr 1fr ;   */
 }
 
 

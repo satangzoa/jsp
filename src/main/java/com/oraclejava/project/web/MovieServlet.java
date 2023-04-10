@@ -71,6 +71,9 @@ public class MovieServlet extends HttpServlet {
 		case "write":
 			createMovie(req,resp);
 			break;
+		case "update":
+			updateMovie(req,resp);
+			break;
 		case "list":
 			listMovie(req, resp);
 			break;
@@ -78,6 +81,26 @@ public class MovieServlet extends HttpServlet {
 	
 	}
 	
+	private void updateMovie(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		if(req.getParameter("update") != null) {
+		//수정 버튼을 눌렀을 경우
+		MovieDAO movieDAO = new MovieDAOImpl();
+		Movie movie = new Movie();
+		movie.setMovie_id(Integer.parseInt(req.getParameter("movie_id")));
+		movie.setTitle(req.getParameter("title"));
+		movie.setPrice(Integer.parseInt(req.getParameter("price")));
+		movie.setSynopsis(req.getParameter("synopsis"));
+		movieDAO.updateMovie(movie);
+		} else if (req.getParameter("delete") != null) {
+			//삭제 버튼을 눌렀을 경우
+			MovieDAO movieDAO = new MovieDAOImpl();
+			movieDAO.deleteMovie(Integer.parseInt(req.getParameter("movie_id")));
+		}
+		resp.sendRedirect("/movie/MovieServlet");
+		
+		
+	}
+
 	private void createMovie(HttpServletRequest req, HttpServletResponse resp)  throws ServletException, IOException{
 		
 		MovieDAO movieDAO = new MovieDAOImpl();
