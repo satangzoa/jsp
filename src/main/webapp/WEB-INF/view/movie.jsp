@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- //http://localhost:8090/movie/MovieServlet?action=list  -->
 <meta charset="UTF-8">
 <title>movie 목록</title>
 <style>
